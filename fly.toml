@@ -1,27 +1,27 @@
-app = "spring-boot-ci-demo"
+app = "matrix-166-ibqjug"
 primary_region = "ams"
 
 [build]
-  dockerfile = "Dockerfile"
+dockerfile = "Dockerfile"
 
 [env]
-  PORT = "8080"
+PORT = "8080"
 
 [experimental]
-  auto_rollback = true
+auto_rollback = true
 
 [[services]]
-  internal_port = 8080
-  protocol = "tcp"
+internal_port = 8080
+protocol = "tcp"
 
-  [[services.ports]]
-    handlers = ["http"]
-    port = 80
+[[services.ports]]
+handlers = ["http"]
+port = 80
 
-  [[services.ports]]
-    handlers = ["tls", "http"]
-    port = 443
+[[services.ports]]
+handlers = ["tls", "http"]
+port = 443
 
-  [[services.tcp_checks]]
-    interval = "15s"
-    timeout = "2s"
+[[services.tcp_checks]]
+interval = "15s"
+timeout = "2s"
