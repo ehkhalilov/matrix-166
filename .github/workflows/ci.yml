@@ -1,4 +1,4 @@
-name: Java CI/CD with Gradle and Fly.io
+name: Java CI with Gradle
 
 on:
   push:
@@ -29,27 +29,19 @@ jobs:
       - name: Run Unit Tests
         run: ./gradlew test
 
-      #      - name: Run Checkstyle
-      #        run: ./gradlew checkstyleMain checkstyleTest
+      #    - name: Run Checkstyle
+      #      run: ./gradlew checkstyleMain checkstyleTest
 
-      #      - name: Run OWASP Dependency Check
-      #        uses: dependency-check/Dependency-Check_Action@main
-      #        with:
-      #          project: 'spring-boot-ci-cd-demo'
-      #          path: '.'
-      #          format: 'HTML'
+      - name: Run OWASP Dependency Check
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: 'spring-boot-ci-cd-demo'
+          path: '.'
+          format: 'HTML'
+          out: 'reports'
 
-      #      - name: Upload OWASP Report
-      #        uses: actions/upload-artifact@v4
-      #        with:
-      #          name: owasp-report
-      #          path: dependency-check-report.html
-
-      - name: Install Flyctl
-        uses: superfly/flyctl-actions/setup-flyctl@master
-
-      - name: Deploy to Fly.io
-        run: flyctl deploy --remote-only
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-
+      - name: Upload OWASP Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: owasp-report
+          path: reports/
