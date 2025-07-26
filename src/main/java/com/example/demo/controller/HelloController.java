@@ -8,14 +8,7 @@ public class HelloController {
 
     @GetMapping("/hello")
     public String sayHello() {
-        System.out.println();
-        return "Hello from CI/CD";
-    }
-
-
-    @GetMapping("/test")
-    public String test() {
-        System.out.println();
-        return "Test";
+        System.out.println("Hello");
+        return "Hello from CI/CD!!!!!";
     }
 }

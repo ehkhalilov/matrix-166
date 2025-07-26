@@ -1,10 +1,9 @@
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin:17-jdk
 
-ARG JAR_FILE=build/libs/spring-boot-ci-cd-demo-0.0.1-SNAPSHOT.jar
-COPY ${JAR_FILE} app.jar
+WORKDIR /app
 
-ENV PORT=8080
+COPY build/libs/*.jar spring-boot-ci-cd-demo-0.0.1-SNAPSHOT.jar
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+ENTRYPOINT ["java", "-jar", "spring-boot-ci-cd-demo-0.0.1-SNAPSHOT.jar"]

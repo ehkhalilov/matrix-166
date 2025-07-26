@@ -18,6 +18,6 @@ class HelloControllerSpec extends Specification {
         expect:
         mockMvc.perform(get("/hello"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("Hello from CI/CD"))
+                .andExpect(MockMvcResultMatchers.content().string("Hello from CI/CD!!!!!"))
     }
 }
