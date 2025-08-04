@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: my-springboot-app
-  namespace: matrix-165
   labels:
     app: my-springboot-app
 spec:
@@ -21,39 +20,39 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
-          env:
-            - name: TEST_DATA
-              valueFrom:
-                configMapKeyRef:
-                  name: common-config
-                  key: TEST_DATA
-            - name: LOG_LEVEL
-              valueFrom:
-                configMapKeyRef:
-                  name: common-config
-                  key: LOG_LEVEL
+#          env:
+#            - name: TEST_DATA
+#              valueFrom:
+#                configMapKeyRef:
+#                  name: common-config
+#                  key: TEST_DATA
+#            - name: LOG_LEVEL
+#              valueFrom:
+#                configMapKeyRef:
+#                  name: common-config
+#                  key: LOG_LEVEL
 
 ---
-apiVersion: batch/v1
-kind: CronJob
-metadata:
-  name: my-springboot-app-cron
-  namespace: matrix-165
-  labels:
-    app: my-springboot-app
-spec:
-  schedule: "*/1 * * * *"         # Runs every day at midnight
-  concurrencyPolicy: Forbid     # Prevents overlapping jobs
-  successfulJobsHistoryLimit: 2
-  failedJobsHistoryLimit: 2
-  jobTemplate:
-    spec:
-      template:
-        spec:
-          restartPolicy: OnFailure
-          containers:
-            - name: cron-task
-              image: curlimages/curl:8.5.0
-              command: [ "/bin/sh", "-c" ]
-              args:
-                - curl -sS http://my-springboot-app:8080/hello || exit 1
+#apiVersion: batch/v1
+#kind: CronJob
+#metadata:
+#  name: my-springboot-app-cron
+#  namespace: matrix-165
+#  labels:
+#    app: my-springboot-app
+#spec:
+#  schedule: "*/1 * * * *"         # Runs every day at midnight
+#  concurrencyPolicy: Forbid     # Prevents overlapping jobs
+#  successfulJobsHistoryLimit: 2
+#  failedJobsHistoryLimit: 2
+#  jobTemplate:
+#    spec:
+#      template:
+#        spec:
+#          restartPolicy: OnFailure
+#          containers:
+#            - name: cron-task
+#              image: curlimages/curl:8.5.0
+#              command: [ "/bin/sh", "-c" ]
+#              args:
+#                - curl -sS http://my-springboot-app:8080/hello || exit 1
