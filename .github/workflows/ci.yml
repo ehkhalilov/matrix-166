@@ -52,8 +52,8 @@ jobs:
           location: us-central1-a
       - name: Deploy to GKE
         run: |
-          kubectl set image deployment/springboot-app springboot-app=/my-springboot-app:latest
-          kubectl rollout status deployment/springboot-app
+          kubectl set image deployment/my-springboot-app my-springboot-app=/my-springboot-app:latest
+          kubectl rollout status deployment/my-springboot-app
 
       #    - name: Run Checkstyle
       #      run: ./gradlew checkstyleMain checkstyleTest
